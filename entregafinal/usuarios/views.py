@@ -8,7 +8,7 @@ from .models import Avatar
 from .forms import AvatarForm, UserRegisterForm, EditProfileForm
 
 @login_required
-def perfil_avatar(request):
+def profile_avatar(request):
     avatar = Avatar.objects.filter(user=request.user).first()
     return render(request, 'usuarios/perfil.html', {'avatar': avatar})
 
@@ -41,7 +41,7 @@ def login_request(request):
 
     form = AuthenticationForm()
 
-    return render(request, "AppCoder/usuario/login.html", {"form": form})
+    return render(request, "usuarios/iniciar_sesion.html", {"form": form})
 
 def register(request):
 
@@ -53,16 +53,16 @@ def register(request):
 
                   username = form.cleaned_data['username']
                   form.save()
-                  return render(request,"AppCoder/inicio.html" ,  {"mensaje":"Usuario Creado :)"})
+                  return render(request,"index.html" ,  {"mensaje":"Usuario Creado :)"})
 
       else:
             # form = UserCreationForm()       
             form = UserRegisterForm()     
 
-      return render(request,"AppCoder/usuario/registro.html" ,  {"form":form})
+      return render(request,"usuarios/registro.html" ,  {"form":form})
 
 @login_required 
-def editarPerfil(request):
+def update_profile(request):
     usuario = request.user
     
     if usuario.is_staff == True:
@@ -94,6 +94,6 @@ def upload_avatar(request):
             return redirect('inicio')
     else:
         form = AvatarForm(instance=avatar)
-    return render(request, 'AppCoder/usuario/upload_avatar.html', {'form': form})
+    return render(request, 'usuario/upload_avatar.html', {'form': form})
 
 

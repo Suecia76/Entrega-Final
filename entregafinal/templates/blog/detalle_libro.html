@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle de {{libro.titulo}}{% endblock %}
+
+{% block content %}
+
+<h1>Detalle de {{libro.titulo}} </h1>
+
+<ul>
+    <li><strong>Título:</strong> {{libro.titulo}}</li>
+    <li><strong>Autor:</strong> {{libro.autor}}</li>
+    <li><strong>Fecha de Publicación:</strong> {{libro.fecha_publicacion}}</li>
+    <li><strong>Descripción:</strong> {{libro.descripcion}}</li>
+    <li><strong>Género:</strong> {{libro.genero}}</li>
+    <li><strong>Creado por:</strong> {{libro.creado_por.username}}</li>
+    <li><strong>Fecha de Creación:</strong> {{libro.fecha_creacion}}</li>
+    {% if libro.imagen %}
+        <li><strong>Imagen:</strong> <img src="{{ libro.imagen.url }}" alt="{{ libro.titulo }}" style="max-width: 200px;"></li>
+    {% else %}
+        <li><strong>Imagen:</strong> No disponible</li>
+    {% endif %}
+</ul>
+
+{% endblock %}

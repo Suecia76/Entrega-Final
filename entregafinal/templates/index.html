@@ -1,12 +1,27 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>mi blog</title>
-  </head>
-  <body>
-    <h1>Bienvenido a mi blog</h1>
-    <p>Este es el contenido de la página de inicio del blog.</p>
-  </body>
-</html>
+{% extends "base.html" %} 
+{% block title %}Inicio{% endblock %}
+ 
+{% block content%}
+<h1>Bienvenido a LibroBlog</h1>
+<p>
+    Este es un espacio pensado para lectores y escritores apasionados. Aquí podés subir tus propios libros,
+    descubrir nuevas lecturas, compartir recomendaciones y formar parte de una comunidad que ama leer tanto como vos.
+</p>
+<p>
+    Iniciá sesión o registrate para comenzar a compartir tus obras. ¡Tu próxima historia favorita puede estar a un clic de distancia!
+</p>
+
+{% if request.user.is_authenticated %}
+
+<p>
+    <a href="{% url 'lista_libros' %}" class="btn btn-primary">Ver Libros</a>
+    <a href="{% url 'crear_libro' %}" class="btn btn-secondary">Subir Libro</a>
+
+{% else %}
+<p>
+    <a href="{% url 'iniciar_sesion' %}" class="btn btn-primary">Iniciar Sesión</a>
+    <a href="{% url 'registro' %}" class="btn btn-secondary">Registrarse</a>
+</p>
+{% endif %}
+
+{% endblock %}
