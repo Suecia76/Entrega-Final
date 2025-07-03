@@ -76,6 +76,7 @@ Este proyecto es una aplicación web desarrollada con Django que permite a los u
 
 - Los archivos subidos se guardan en la carpeta `media/`.
 - Para producción, recuerda configurar correctamente las variables de entorno y el manejo de archivos estáticos y media.
+- Link del video explicativo: [https://www.youtube.com/watch?v=KgVLAKqeTEE]
 
 ---
 
