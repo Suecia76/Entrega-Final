@@ -24,12 +24,14 @@
 </div>
 
 <div>
-
+    
+<a href="{% url 'modificar_avatar' %}" class="btn btn-primary">Modificar Avatar</a>
 {% if avatar %}
+
 <div class="my-4">
 
     <h2>Tu Avatar</h2>
-    <a href="{% url 'modificar_avatar' %}" class="btn btn-primary">Modificar Avatar</a>
+    
     <div class="mt-3">
         <p>Tu avatar actual:</p>
     <img src="{{ avatar.imagen.url }}" alt="Avatar" class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover;"></div>

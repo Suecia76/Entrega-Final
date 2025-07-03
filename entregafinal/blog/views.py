@@ -16,6 +16,8 @@ class LibroListView(ListView):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
             context['avatar'] = Avatar.objects.filter(user=self.request.user).first()
+        else:
+            context['avatar'] = None
         return context
 
 class LibroDetailView(DetailView):
@@ -27,6 +29,8 @@ class LibroDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
             context['avatar'] = Avatar.objects.filter(user=self.request.user).first()
+        else:
+            context['avatar'] = None
         return context
 
 class LibroCreateView(LoginRequiredMixin, CreateView):
@@ -41,7 +45,10 @@ class LibroCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['avatar'] = Avatar.objects.filter(user=self.request.user).first()
+        if self.request.user.is_authenticated:
+            context['avatar'] = Avatar.objects.filter(user=self.request.user).first()
+        else:
+            context['avatar'] = None
         return context
 
 class LibroUpdateView(LoginRequiredMixin, UpdateView):
@@ -52,7 +59,10 @@ class LibroUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['avatar'] = Avatar.objects.filter(user=self.request.user).first()
+        if self.request.user.is_authenticated:
+            context['avatar'] = Avatar.objects.filter(user=self.request.user).first()
+        else:
+            context['avatar'] = None
         return context
 
 class LibroDeleteView(LoginRequiredMixin, DeleteView):
@@ -62,9 +72,15 @@ class LibroDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['avatar'] = Avatar.objects.filter(user=self.request.user).first()
+        if self.request.user.is_authenticated:
+            context['avatar'] = Avatar.objects.filter(user=self.request.user).first()
+        else:
+            context['avatar'] = None
         return context
 
 def confirmacion_borrado(request, pk):
     libro = Libro.objects.get(pk=pk)
-    return render(request, 'blog/confirmacion_libro.html', {'libro': libro})
+    avatar = None
+    if request.user.is_authenticated:
+        avatar = Avatar.objects.filter(user=request.user).first()
+    return render(request, 'blog/confirmacion_libro.html', {'libro': libro, 'avatar': avatar})

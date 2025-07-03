@@ -30,16 +30,12 @@ def login_request(request):
         form = AuthenticationForm(request, data = request.POST)
 
         if form.is_valid():  # Si pasó la validación de Django
-
             usuario = form.cleaned_data.get('username')
             contrasenia = form.cleaned_data.get('password')
-
-            user = authenticate(username= usuario, password=contrasenia)
-
+            user = authenticate(username=usuario, password=contrasenia)
             if user is not None:
                 login(request, user)
-
-        return redirect('inicio')
+            return redirect('inicio')
 
     form = AuthenticationForm()
 
@@ -88,13 +84,14 @@ def update_profile(request):
 
 @login_required
 def upload_avatar(request):
+    avatar, created = Avatar.objects.get_or_create(user=request.user)
     if request.method == 'POST':
-        form = AvatarForm(request.POST, request.FILES, instance=request.user.avatar)
+        form = AvatarForm(request.POST, request.FILES, instance=avatar)
         if form.is_valid():
             form.save()
             return redirect('perfil')
     else:
-        form = AvatarForm(instance=request.user.avatar)
+        form = AvatarForm(instance=avatar)
     return render(request, 'usuarios/modificar_avatar.html', {'form': form})
 
 
