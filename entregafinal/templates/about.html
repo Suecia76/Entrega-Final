@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %} Sobre mí {% endblock %}
+
+{% block content %}
+
+<h1>Sobre mí</h1>
+
+<div class="text-center mb-4">
+    <div class="d-flex flex-row align-items-center justify-content-center gap-5">
+        <div>
+            <h2>Santiago</h2>
+            <p class="text-muted fs-4">Programador Junior</p>
+        </div>
+        <div>
+            <img src="{% static 'imgs/yo.jpeg' %}" alt="Foto de Santiago" class="img-fluid rounded-circle mb-3" style="max-width: 200px;">
+        </div>
+    </div>
+<p class="fs-5">Soy un programador junior sin experiencia que esta intentando aprender y mejorar con el tiempo
+    , me apasiona el back mas que el front aunque no me cierro a ninguno, estoy por recibirme de una carrera
+    de diseño y programación web en la escuela Da Vinci, donde he aprendido mucho sobre HTML, CSS, JavaScript
+    PHP, Wordpress y algunos frameworks como React, Vue y Laravel.
+</p>
+</div>
+{% endblock %}

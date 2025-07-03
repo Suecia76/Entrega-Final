@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Perfil de {{ usuario.username }}{% endblock %}
+
+{% block content %}
+
+<h1>Bienvenido a tu perfil {{usuario.username}}</h1>
+
+<div class="d-flex justify-content-around gap-5 align-items-center">
+
+<div>
+
+<h2>Tus datos</h2>
+<ul>
+    <li>Nombre de usuario: {{ usuario.username }}</li>
+    <li>Email: {{ usuario.email }}</li>
+    <li>Nombre: {{ usuario.first_name }}</li>
+    <li>Apellido: {{ usuario.last_name }}</li>
+</ul>
+<a>
+    <a href="{% url 'modificar_perfil' %}" class="btn btn-primary">Modificar Perfil</a>
+</div>
+
+<div>
+
+{% if avatar %}
+<div class="my-4">
+
+    <h2>Tu Avatar</h2>
+    <a href="{% url 'modificar_avatar' %}" class="btn btn-primary">Modificar Avatar</a>
+    <div class="mt-3">
+        <p>Tu avatar actual:</p>
+    <img src="{{ avatar.imagen.url }}" alt="Avatar" class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover;"></div>
+{% else %}
+    <p>No tienes un avatar configurado.</p>
+</div>
+{% endif %}
+
+</div>
+
+</div>
+
+{% endblock %}

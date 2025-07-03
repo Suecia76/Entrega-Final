@@ -4,19 +4,21 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic import UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 from .models import Avatar
 from .forms import AvatarForm, UserRegisterForm, EditProfileForm
 
 @login_required
-def profile_avatar(request):
+def profile(request):
     avatar = Avatar.objects.filter(user=request.user).first()
-    return render(request, 'usuarios/perfil.html', {'avatar': avatar})
+    usuario = request.user
+    return render(request, 'usuarios/perfil.html', {'avatar': avatar, 'usuario': usuario})
 
 class AvatarUpdateView(LoginRequiredMixin, UpdateView):
     model = Avatar
     form_class = AvatarForm
-    template_name = 'usuarios/avatar_form.html'
-    success_url = 'perfil-avatar'
+    template_name = 'usuarios/modificar_avatar.html'
+    success_url = reverse_lazy('perfil')
 
     def get_object(self, queryset=None):
         avatar, created = Avatar.objects.get_or_create(user=self.request.user)
@@ -86,14 +88,13 @@ def update_profile(request):
 
 @login_required
 def upload_avatar(request):
-    avatar = Avatar.objects.filter(user=request.user.id).first()
     if request.method == 'POST':
-        form = AvatarForm(request.POST, request.FILES, instance=avatar)
+        form = AvatarForm(request.POST, request.FILES, instance=request.user.avatar)
         if form.is_valid():
             form.save()
-            return redirect('inicio')
+            return redirect('perfil')
     else:
-        form = AvatarForm(instance=avatar)
-    return render(request, 'usuario/upload_avatar.html', {'form': form})
+        form = AvatarForm(instance=request.user.avatar)
+    return render(request, 'usuarios/modificar_avatar.html', {'form': form})
 
 

@@ -9,7 +9,7 @@ from .views import (
 )
 
 urlpatterns = [
-    path('/libros', LibroListView.as_view(), name='lista_libros'),                    # Lista de libros
+    path('libros', LibroListView.as_view(), name='lista_libros'),                    # Lista de libros
     path('libro/<int:pk>/', LibroDetailView.as_view(), name='detalle_libro'), # Detalle de un libro
     path('crear_libro/', LibroCreateView.as_view(), name='crear_libro'),     # Crear libro
     path('editar_libro/<int:pk>/', LibroUpdateView.as_view(), name='editar_libro'), # Editar libro

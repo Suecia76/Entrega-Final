@@ -12,7 +12,7 @@ class LibroForm(forms.ModelForm):
             'fecha_publicacion': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'descripcion': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
             'genero': forms.TextInput(attrs={'class': 'form-control'}),
-            'imagen': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
+            'imagen': forms.FileInput(attrs={'class': 'form-control-file'}),
         }
         labels = {
             'titulo': 'Título',

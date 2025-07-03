@@ -3,11 +3,21 @@
 {% block title %}Borrar Libro: {{ libro.titulo }}{% endblock %}
 
 {% block content %}
-<h1>Confirmar Borrado de Libro</h1>
-<p>¿Estás seguro de que deseas borrar el libro "{{ libro.titulo }}"?</p>
-<form action="{% url 'borrar_libro' libro.pk %}" method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Borrar</button>
-    <a href="{% url 'lista_libros' %}" class="btn btn-secondary">Cancelar</a>
-</form>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow">
+                <div class="card-body text-center">
+                    <h1 class="card-title mb-4 text-danger">Confirmar Borrado de Libro</h1>
+                    <p class="mb-4">¿Estás seguro de que deseas borrar el libro <strong>"{{ libro.titulo }}"</strong>?</p>
+                    <form action="{% url 'borrar_libro' libro.pk %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger me-2">Borrar</button>
+                        <a href="{% url 'lista_libros' %}" class="btn btn-secondary">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

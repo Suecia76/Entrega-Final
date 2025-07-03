@@ -6,14 +6,14 @@ from .views import (
     update_profile,
     login_request,
     register,
-    profile_avatar,
+    profile,
     upload_avatar,
 )
 urlpatterns = [
     path('editar_avatar/<int:pk>/', AvatarUpdateView.as_view(), name='editar_avatar'), # Editar avatar
     path('login/', login_request ,name='iniciar_sesion'),
     path('register/', register ,name='registro'),
-    # path('profile/',  ,name='perfil'),
+    path('profile/', profile ,name='perfil'),
     path('edit_profile/', update_profile , name ='modificar_perfil'),
     path('edit_avatar/', upload_avatar, name='modificar_avatar'),
     path('logout/', LogoutView.as_view(template_name='usuarios/cerrar_sesion.html'), name='cerrar_sesion'),
